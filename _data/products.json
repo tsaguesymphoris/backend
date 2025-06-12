@@ -1,0 +1,94 @@
+[
+  {
+    "_id": "5d713995b721c3bb38c1f5d0",
+    "user": "5d7a514b5d2c12c7449be045",
+    "name": "Disque dur",
+    "description": "Disque dur SSD de 500 Go, parfait pour améliorer les performances de votre PC.",
+    "price": 25000,
+    "category": "Electronics",
+    "condition": "Used",
+    "stock": 5,
+    "photos": ["disque1.jpg", "disque2.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup", "Shipping"],
+    "location": {
+      "type": "Point",
+      "coordinates": [11.5173, 3.8570]
+    },
+    "localisation": {
+      "quartier": "Odja",
+      "address": "Face boulangerie Acropole",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "_id": "5d713a66ec8f2b88b8f830b8",
+    "user": "5d7a514b5d2c12c7449be046",
+    "name": "Banane Platin",
+    "description": "Régime de bananes platines bio cultivées localement, parfaites pour la cuisson.",
+    "price": 3000,
+    "category": "Food",
+    "condition": "New",
+    "stock": 10,
+    "photos": ["banane1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup", "HomeDelivery"],
+    "location": {
+      "type": "Point",
+      "coordinates": [11.5002, 3.8648]
+    },
+    "localisation": {
+      "quartier": "Nsam",
+      "address": "Derrière station Tradex Nsam",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "_id": "5d725a037b292f5f8ceff787",
+    "user": "5c8a1d5b0190b214360dc031",
+    "name": "Codemasters",
+    "description": "Pack de livres et outils pour apprentissage du développement web fullstack.",
+    "price": 15000,
+    "category": "Books",
+    "condition": "New",
+    "stock": 3,
+    "photos": ["code1.jpg", "code2.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Shipping"],
+    "location": {
+      "type": "Point",
+      "coordinates": [11.4955, 3.8851]
+    },
+    "localisation": {
+      "quartier": "Bastos",
+      "address": "Rue Bastos Ambassade USA",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "_id": "5d725a1b7b292f5f8ceff788",
+    "user": "5c8a1d5b0190b214360dc032",
+    "name": "PC Portable",
+    "description": "Ordinateur portable HP, core i5, SSD 256 Go, parfait pour travail et études.",
+    "price": 185000,
+    "category": "Electronics",
+    "condition": "Used",
+    "stock": 1,
+    "photos": ["pc1.jpg", "pc2.jpg", "pc3.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup", "HomeDelivery"],
+    "location": {
+      "type": "Point",
+      "coordinates": [11.4708, 3.8480]
+    },
+    "localisation": {
+      "quartier": "Mendong",
+      "address": "En face de l'École publique Mendong",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  }
+]
