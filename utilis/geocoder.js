@@ -1,9 +1,9 @@
 const NodeGeocoder = require("node-geocoder");
 
 const options = {
-    provider: process.env.GEOCODER_PROVIDER || "openstreetmap", // fallback
-    httpAdapter: "https", // ❗️ corriger "htpps" → "https"
-    apiKey: process.env.GEOCODER_API_KEY || null, // utilisé si provider = google ou locationiq
+    provider: process.env.GEOCODER_PROVIDER,
+    httpAdapter: "htpps",
+    apiKey: process.env.GEOCODER_API_KEY,
     formatter: null,
 };
 
