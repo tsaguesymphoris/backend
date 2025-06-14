@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const geocoder = require("../utilis/geocoder");
+const { type } = require("os");
 
 const ProductSchema = new mongoose.Schema(
     {
@@ -119,9 +121,32 @@ const ProductSchema = new mongoose.Schema(
     }
 );
 
-// Index géospatial pour recherches par proximité
-ProductSchema.index({ location: "2dsphere" });
-// Un même utilisateur ne peut pas avoir deux produits avec le même nom
-ProductSchema.index({ user: 1, name: 1 }, { unique: true });
+ProductSchema.pre("save", async function (next) {
+    // Si coordonnées déjà présentes (cas mobile), on ne géocode pas
+    if (
+        this.location &&
+        this.location.coordinates &&
+        this.location.coordinates.length === 2
+    ) {
+        return next();
+    }
+
+    // Sinon → cas web : géocoder à partir de quartier + ville + pays
+    const { quartier, city, country } = this.localisation;
+    const fullAddress = `${quartier}, ${city}, ${country}`;
+    const loc = await geocoder.geocode(fullAddress);
+
+    if (!loc || loc.length === 0) {
+        return next(new Error("Adresse introuvable pour géocodage"));
+    }
+
+    this.location = {
+        type: "Point",
+        coordinates: [loc[0].longitude, loc[0].latitude],
+        formattedAddress: loc[0].formattedAddress,
+    };
+
+    next();
+});
 
 module.exports = mongoose.model("Product", ProductSchema);
