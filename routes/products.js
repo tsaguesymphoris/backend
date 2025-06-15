@@ -7,9 +7,12 @@ const {
     createProduct,
     updateProduct,
     deleteProduct,
+    getProductsInRadiusSmart,
 } = require("../controllers/productsController");
 
 router.route("/").get(getProducts).post(createProduct);
+
+router.route("/radius").post(getProductsInRadiusSmart);
 
 router.route("/:id").get(getProduct).put(updateProduct).delete(deleteProduct);
 
