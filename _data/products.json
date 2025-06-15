@@ -1,8 +1,7 @@
 [
   {
-    "_id": "5d713995b721c3bb38c1f5d0",
-    "user": "5d7a514b5d2c12c7449be045",
-    "name": "Disque dur",
+    "name": "Disque dur SSD 500Go",
+    "user": "665bce8b3cc84a17ec0ea1d9",
     "description": "Disque dur SSD de 500 Go, parfait pour améliorer les performances de votre PC.",
     "price": 25000,
     "category": "Electronics",
@@ -11,10 +10,7 @@
     "photos": ["disque1.jpg", "disque2.jpg"],
     "isAvailable": true,
     "deliveryOptions": ["Pickup", "Shipping"],
-    "location": {
-      "type": "Point",
-      "coordinates": [11.5173, 3.8570]
-    },
+    "location": { "type": "Point", "coordinates": [11.5173, 3.8570] },
     "localisation": {
       "quartier": "Odja",
       "address": "Face boulangerie Acropole",
@@ -23,9 +19,8 @@
     }
   },
   {
-    "_id": "5d713a66ec8f2b88b8f830b8",
-    "user": "5d7a514b5d2c12c7449be046",
-    "name": "Banane Platin",
+    "name": "Banane plantain bio",
+    "user": "665bce8b3cc84a17ec0ea1d9",
     "description": "Régime de bananes platines bio cultivées localement, parfaites pour la cuisson.",
     "price": 3000,
     "category": "Food",
@@ -34,10 +29,7 @@
     "photos": ["banane1.jpg"],
     "isAvailable": true,
     "deliveryOptions": ["Pickup", "HomeDelivery"],
-    "location": {
-      "type": "Point",
-      "coordinates": [11.5002, 3.8648]
-    },
+    "location": { "type": "Point", "coordinates": [11.5002, 3.8648] },
     "localisation": {
       "quartier": "Nsam",
       "address": "Derrière station Tradex Nsam",
@@ -46,9 +38,8 @@
     }
   },
   {
-    "_id": "5d725a037b292f5f8ceff787",
-    "user": "5c8a1d5b0190b214360dc031",
-    "name": "Codemasters",
+    "name": "Pack Codemasters Web",
+    "user": "665bce8b3cc84a17ec0ea1d9",
     "description": "Pack de livres et outils pour apprentissage du développement web fullstack.",
     "price": 15000,
     "category": "Books",
@@ -57,10 +48,7 @@
     "photos": ["code1.jpg", "code2.jpg"],
     "isAvailable": true,
     "deliveryOptions": ["Shipping"],
-    "location": {
-      "type": "Point",
-      "coordinates": [11.4955, 3.8851]
-    },
+    "location": { "type": "Point", "coordinates": [11.4955, 3.8851] },
     "localisation": {
       "quartier": "Bastos",
       "address": "Rue Bastos Ambassade USA",
@@ -69,9 +57,8 @@
     }
   },
   {
-    "_id": "5d725a1b7b292f5f8ceff788",
-    "user": "5c8a1d5b0190b214360dc032",
-    "name": "PC Portable",
+    "name": "PC Portable HP i5",
+    "user": "665bce8b3cc84a17ec0ea1d9",
     "description": "Ordinateur portable HP, core i5, SSD 256 Go, parfait pour travail et études.",
     "price": 185000,
     "category": "Electronics",
@@ -80,13 +67,124 @@
     "photos": ["pc1.jpg", "pc2.jpg", "pc3.jpg"],
     "isAvailable": true,
     "deliveryOptions": ["Pickup", "HomeDelivery"],
-    "location": {
-      "type": "Point",
-      "coordinates": [11.4708, 3.8480]
-    },
+    "location": { "type": "Point", "coordinates": [11.4708, 3.8480] },
     "localisation": {
       "quartier": "Mendong",
       "address": "En face de l'École publique Mendong",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Téléviseur LED 32 pouces",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "TV LED 32 pouces avec port HDMI et USB, idéal pour salon ou chambre.",
+    "price": 85000,
+    "category": "Electronics",
+    "condition": "New",
+    "stock": 4,
+    "photos": ["tv1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["HomeDelivery"],
+    "location": { "type": "Point", "coordinates": [11.5200, 3.8600] },
+    "localisation": {
+      "quartier": "Emana",
+      "address": "Carrefour Emana",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Table basse moderne",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "Table basse faite main en bois massif, finition vernie.",
+    "price": 40000,
+    "category": "Furniture",
+    "condition": "Used",
+    "stock": 2,
+    "photos": ["table1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup"],
+    "location": { "type": "Point", "coordinates": [11.4980, 3.8700] },
+    "localisation": {
+      "quartier": "Essos",
+      "address": "Rue collège adventiste",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Casque Bluetooth V5",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "Casque audio sans fil, autonomie 12h, micro intégré.",
+    "price": 15000,
+    "category": "Electronics",
+    "condition": "New",
+    "stock": 7,
+    "photos": ["casque1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup", "Shipping"],
+    "location": { "type": "Point", "coordinates": [11.4600, 3.8500] },
+    "localisation": {
+      "quartier": "Mvog-Mbi",
+      "address": "Marché Mvog-Mbi",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Armoire miroir 3 portes",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "Armoire en bois, 3 portes, avec miroir intégré.",
+    "price": 65000,
+    "category": "Furniture",
+    "condition": "Used",
+    "stock": 1,
+    "photos": ["armoire1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["HomeDelivery"],
+    "location": { "type": "Point", "coordinates": [11.5300, 3.8750] },
+    "localisation": {
+      "quartier": "Etoudi",
+      "address": "Vers le Palais Présidentiel",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Sac scolaire étanche",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "Sac à dos imperméable, 3 compartiments, idéal pour élèves.",
+    "price": 8000,
+    "category": "Fashion",
+    "condition": "New",
+    "stock": 15,
+    "photos": ["sac1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["Pickup", "Shipping"],
+    "location": { "type": "Point", "coordinates": [11.4870, 3.8520] },
+    "localisation": {
+      "quartier": "Biyem-Assi",
+      "address": "Face Université Catholique",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    }
+  },
+  {
+    "name": "Bouteille de gaz 12kg",
+    "user": "665bce8b3cc84a17ec0ea1d9",
+    "description": "Bouteille de gaz remplie de 12kg, livrée à domicile.",
+    "price": 10000,
+    "category": "Energy",
+    "condition": "New",
+    "stock": 12,
+    "photos": ["gaz1.jpg"],
+    "isAvailable": true,
+    "deliveryOptions": ["HomeDelivery"],
+    "location": { "type": "Point", "coordinates": [11.5100, 3.8650] },
+    "localisation": {
+      "quartier": "Nlongkak",
+      "address": "Station Tradex",
       "city": "Yaoundé",
       "country": "Cameroun"
     }
