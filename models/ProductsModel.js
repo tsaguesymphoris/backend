@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const geocoder = require("../utilis/geocoder");
+const geocoder = require("../utils/geocoder");
 const { type } = require("os");
 
 const ProductSchema = new mongoose.Schema(
