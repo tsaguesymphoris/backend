@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const connectDB = require("./config/db");
 const colors = require("colors");
 const errorHandler = require("./middlewares/error");
+const scheduleCleanup = require("./cron/cleanupUnverifiedUsers");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -12,8 +13,11 @@ dotenv.config({ path: "./config/config.env" });
 // Connect to database
 connectDB();
 
+scheduleCleanup();
+
 // ROute FIles
 const products = require("./routes/products");
+const auth = require("./routes/authRoute");
 
 const app = express();
 
@@ -27,6 +31,7 @@ if (process.env.NODE_ENV === "development") {
 
 //Mount routers
 app.use("/api/v1/products", products);
+app.use("/api/v1/auth", auth);
 app.use(errorHandler);
 
 const PORT = process.env.PORT;
