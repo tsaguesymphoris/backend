@@ -6,6 +6,8 @@ const connectDB = require("./config/db");
 const colors = require("colors");
 const errorHandler = require("./middlewares/error");
 const scheduleCleanup = require("./cron/cleanupUnverifiedUsers");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -14,12 +16,22 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 scheduleCleanup();
+console.log("✔️ JWT_SECRET:", process.env.JWT_SECRET);
 
 // ROute FIles
 const products = require("./routes/products");
 const auth = require("./routes/authRoute");
 
 const app = express();
+app.use(cookieParser());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true, // ⬅️ Important pour autoriser les cookies
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 //Body Parser
 app.use(express.json());

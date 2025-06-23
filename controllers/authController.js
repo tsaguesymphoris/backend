@@ -135,64 +135,115 @@ exports.verifyEmail = asyncHandler(async (req, res, next) => {
 exports.login = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
-    // 1. Validate input
+    /* -------------------------------------------------------------------- */
+    /* 1. Vérifications                                                     */
+    /* -------------------------------------------------------------------- */
     if (!email || !password) {
         return next(
             new ErrorResponse("Please provide email and password", 400)
         );
     }
 
-    // 2. Find user by email
     const user = await UserModel.findOne({ email }).select("+password");
-
-    if (!user) {
+    if (!user || !(await user.matchPassword(password))) {
         return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-    // 3. Check password
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch) {
-        return next(new ErrorResponse("Invalid credentials", 401));
-    }
-
-    // 4. Ensure email is verified
     if (!user.isEmailVerified) {
         return next(
             new ErrorResponse("Please verify your email before logging in", 403)
         );
     }
 
-    // 5. Generate and send token in cookie
+    /* -------------------------------------------------------------------- */
+    /* 2. Génération du JWT                                                 */
+    /* -------------------------------------------------------------------- */
     const token = user.getSignedJwtToken();
 
+    /* -------------------------------------------------------------------- */
+    /* 3. Options du cookie  (⚠️ clé de la correction)                      */
+    /* -------------------------------------------------------------------- */
     const cookieOptions = {
-        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-        httpOnly: true, // prevents JS access (XSS protection)
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Strict",
+        httpOnly: true,
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 jours
+
+        // ➜ localhost (dev) : même protocole HTTP mais ports différents
+        //    → Lax autorise l’envoi du cookie lors de fetch/XHR
+        // ➜ prod (HTTPS, sous-domaines) : None + Secure
+        sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
+        secure: process.env.NODE_ENV === "production", // doit être true si SameSite=None
     };
 
-    res.status(200).cookie("token", token, cookieOptions).json({
-        success: true,
-        message: "Login successful",
-    });
+    /* -------------------------------------------------------------------- */
+    /* 4. Réponse                                                           */
+    /* -------------------------------------------------------------------- */
+    res.status(200)
+        .cookie("token", token, cookieOptions)
+        .json({
+            success: true,
+            message: "Login successful",
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                gender: user.gender,
+                role: user.role,
+                photo: user.photo,
+                isEmailVerified: user.isEmailVerified,
+                isValidated: user.isValidated,
+                address: user.address,
+                location: user.location,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
+            },
+        });
 });
 
 /**
- * @desc    Get current logged in user
+ * @desc    Get current logged-in user from JWT token in cookie
  * @route   GET /api/v1/auth/me
- * @access  Private
+ * @access  Private (based on cookie token)
  *
  * @examples
  * GET /api/v1/auth/me
- * Headers: Authorization: Bearer <token>
  */
 exports.getMe = asyncHandler(async (req, res, next) => {
-    const user = await UserModel.findById(req.user.id);
-    res.status(200).json({
-        success: true,
-        data: user,
-    });
+    const token = req.cookies.token;
+
+    if (!token) {
+        return next(new ErrorResponse("Not authorized - no token", 401));
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await UserModel.findById(decoded.id);
+
+        if (!user) {
+            return next(new ErrorResponse("User not found", 404));
+        }
+
+        res.status(200).json({
+            success: true,
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                gender: user.gender,
+                role: user.role,
+                photo: user.photo,
+                isEmailVerified: user.isEmailVerified,
+                isValidated: user.isValidated,
+                address: user.address,
+                location: user.location,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
+            },
+        });
+    } catch (err) {
+        return next(new ErrorResponse("Not authorized - invalid token", 401));
+    }
 });
 
 /**
