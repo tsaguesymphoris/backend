@@ -1,7 +1,6 @@
 const UserModel = require("../models/UserModel");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middlewares/async");
-const sendTokenResponse = require("../utils/sendTokenResponse"); // utilitaire pour gérer le JWT
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 
@@ -75,7 +74,7 @@ exports.register = asyncHandler(async (req, res, next) => {
         await user.save({ validateBeforeSave: false });
 
         console.error(err);
-        return next(
+        return next( 
             new ErrorResponse("Failed to send verification email", 500)
         );
     }
@@ -154,50 +153,7 @@ exports.login = asyncHandler(async (req, res, next) => {
             new ErrorResponse("Please verify your email before logging in", 403)
         );
     }
-
-    /* -------------------------------------------------------------------- */
-    /* 2. Génération du JWT                                                 */
-    /* -------------------------------------------------------------------- */
-    const token = user.getSignedJwtToken();
-
-    /* -------------------------------------------------------------------- */
-    /* 3. Options du cookie  (⚠️ clé de la correction)                      */
-    /* -------------------------------------------------------------------- */
-    const cookieOptions = {
-        httpOnly: true,
-        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 jours
-
-        // ➜ localhost (dev) : même protocole HTTP mais ports différents
-        //    → Lax autorise l’envoi du cookie lors de fetch/XHR
-        // ➜ prod (HTTPS, sous-domaines) : None + Secure
-        sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
-        secure: process.env.NODE_ENV === "production", // doit être true si SameSite=None
-    };
-
-    /* -------------------------------------------------------------------- */
-    /* 4. Réponse                                                           */
-    /* -------------------------------------------------------------------- */
-    res.status(200)
-        .cookie("token", token, cookieOptions)
-        .json({
-            success: true,
-            message: "Login successful",
-            user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-                gender: user.gender,
-                role: user.role,
-                photo: user.photo,
-                isEmailVerified: user.isEmailVerified,
-                isValidated: user.isValidated,
-                address: user.address,
-                location: user.location,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt,
-            },
-        });
+    sendTokenResponse(user, 200, res);
 });
 
 /**
@@ -209,41 +165,11 @@ exports.login = asyncHandler(async (req, res, next) => {
  * GET /api/v1/auth/me
  */
 exports.getMe = asyncHandler(async (req, res, next) => {
-    const token = req.cookies.token;
-
-    if (!token) {
-        return next(new ErrorResponse("Not authorized - no token", 401));
-    }
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await UserModel.findById(decoded.id);
-
-        if (!user) {
-            return next(new ErrorResponse("User not found", 404));
-        }
-
-        res.status(200).json({
-            success: true,
-            data: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-                gender: user.gender,
-                role: user.role,
-                photo: user.photo,
-                isEmailVerified: user.isEmailVerified,
-                isValidated: user.isValidated,
-                address: user.address,
-                location: user.location,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt,
-            },
-        });
-    } catch (err) {
-        return next(new ErrorResponse("Not authorized - invalid token", 401));
-    }
+   const user = await UserModel.findById(req.user.id);
+   res.status(200).json({
+       success: true,
+       data: user
+    });
 });
 
 /**
@@ -303,6 +229,53 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-
-    sendTokenResponse(user, 200, res);
 });
+
+/**
+ * @desc    Log out user (clear the cookie)
+ * @route   GET /api/v1/auth/logout
+ * @access  Private
+ */
+exports.logout = asyncHandler(async (req, res, next) => {
+    // Ajout: suppression du cookie JWT
+    res.cookie("token", "none", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+        sameSite: "lax", // Protection CSRF légère
+        secure: process.env.NODE_ENV === "production"
+    });
+    res.status(200).json({ success: true, message: "User logged out" });
+});
+
+
+// Get token from model, create cookie and send response
+const sendTokenResponse = (user, statusCode, res) => {
+
+    const token = user.getSignedJwtToken()
+    const options = {
+        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE*24 * 60 * 60 * 1000),
+        httpOnly: true
+    }
+
+    if (process.env.NODE_ENV === "production") {
+        options.secure = true;
+    }
+    res.status(statusCode).cookie("token", token, options).json({success: true, token, user});
+
+}
+// GET /api/v1/users?role=provider&isValidated=true&isEmailVerified=true&limit=8
+exports.getUsers = async (req, res) => {
+  // On construit dynamiquement le filtre avec les query params
+  const { role, isValidated, isEmailVerified, limit = 8 } = req.query;
+  const query = {};
+  if (role) query.role = role;
+  if (isValidated !== undefined) query.isValidated = isValidated === "true";
+  if (isEmailVerified !== undefined) query.isEmailVerified = isEmailVerified === "true";
+
+  try {
+    const users = await UserModel.find(query).limit(Number(limit));
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};

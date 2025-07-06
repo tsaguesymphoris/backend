@@ -1,107 +1,182 @@
 [
-	{
-		"_id": "5d7a514b5d2c12c7449be042",
-		"name": "Admin Account",
-		"email": "admin@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5d7a514b5d2c12c7449be043",
-		"name": "Publisher Account",
-		"email": "publisher@gmail.com",
-		"role": "publisher",
-		"password": "123456"
-	},
-	{
-		"_id": "5d7a514b5d2c12c7449be044",
-		"name": "User Account",
-		"email": "user@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5d7a514b5d2c12c7449be045",
-		"name": "John Doe",
-		"email": "john@gmail.com",
-		"role": "publisher",
-		"password": "123456"
-	},
-	{
-		"_id": "5d7a514b5d2c12c7449be046",
-		"name": "Kevin Smith",
-		"email": "kevin@gmail.com",
-		"role": "publisher",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc031",
-		"name": "Mary Williams",
-		"email": "mary@gmail.com",
-		"role": "publisher",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc032",
-		"name": "Sasha Ryan",
-		"email": "sasha@gmail.com",
-		"role": "publisher",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc033",
-		"name": "Greg Harris",
-		"email": "greg@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc034",
-		"name": "Derek Glover",
-		"email": "derek@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc035",
-		"name": "Stephanie Hanson",
-		"email": "steph@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc036",
-		"name": "Jerry Wiliams",
-		"email": "jerry@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc037",
-		"name": "Maggie Johnson",
-		"email": "maggie@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc038",
-		"name": "Barry Dickens",
-		"email": "barry@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc039",
-		"name": "Ryan Bolin",
-		"email": "ryan@gmail.com",
-		"role": "user",
-		"password": "123456"
-	},
-	{
-		"_id": "5c8a1d5b0190b214360dc040",
-		"name": "Sara Kensing",
-		"email": "sara@gmail.com",
-		"role": "user",
-		"password": "123456"
-	}
+  {
+    "gender": "male",
+    "name": "Jean-Michel Tchoua",
+    "email": "jeanmichel.tchoua1@mail.com",
+    "phone": "679100011",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "plumber",
+    "photo": "https://randomuser.me/api/portraits/men/101.jpg",
+    "address": {
+      "quartier": "Mendong",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [11.4700, 3.8500] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "female",
+    "name": "Clarisse Biloa",
+    "email": "clarisse.biloa2@mail.com",
+    "phone": "679100012",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "hairdresser",
+    "photo": "https://randomuser.me/api/portraits/women/102.jpg",
+    "address": {
+      "quartier": "Bastos",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [11.5100, 3.8700] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "male",
+    "name": "Roland Ngono",
+    "email": "roland.ngono3@mail.com",
+    "phone": "679100013",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "electrician",
+    "photo": "https://randomuser.me/api/portraits/men/103.jpg",
+    "address": {
+      "quartier": "Essos",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [11.4980, 3.8700] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "female",
+    "name": "Nadine Nguimfack",
+    "email": "nadine.nguimfack4@mail.com",
+    "phone": "679100014",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "maid",
+    "photo": "https://randomuser.me/api/portraits/women/104.jpg",
+    "address": {
+      "quartier": "Mvog-Mbi",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [11.5000, 3.8600] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "male",
+    "name": "Serge Tchinda",
+    "email": "serge.tchinda5@mail.com",
+    "phone": "679100015",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "carpenter",
+    "photo": "https://randomuser.me/api/portraits/men/105.jpg",
+    "address": {
+      "quartier": "Odja",
+      "city": "Yaoundé",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [11.5200, 3.8800] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "female",
+    "name": "Estelle Ewane",
+    "email": "estelle.ewane6@mail.com",
+    "phone": "679100016",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "painter",
+    "photo": "https://randomuser.me/api/portraits/women/106.jpg",
+    "address": {
+      "quartier": "Bonamoussadi",
+      "city": "Douala",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [9.7167, 4.0678] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "male",
+    "name": "Olivier Moukoko",
+    "email": "olivier.moukoko7@mail.com",
+    "phone": "679100017",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "mechanic",
+    "photo": "https://randomuser.me/api/portraits/men/107.jpg",
+    "address": {
+      "quartier": "Akwa",
+      "city": "Douala",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [9.7085, 4.0466] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "female",
+    "name": "Patricia Biloa",
+    "email": "patricia.biloa8@mail.com",
+    "phone": "679100018",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "maid",
+    "photo": "https://randomuser.me/api/portraits/women/108.jpg",
+    "address": {
+      "quartier": "Makepe",
+      "city": "Douala",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [9.7200, 4.0690] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "male",
+    "name": "François Foyou",
+    "email": "francois.foyou9@mail.com",
+    "phone": "679100019",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "electrician",
+    "photo": "https://randomuser.me/api/portraits/men/109.jpg",
+    "address": {
+      "quartier": "Bonanjo",
+      "city": "Douala",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [9.7110, 4.0460] },
+    "isEmailVerified": true,
+    "isValidated": true
+  },
+  {
+    "gender": "female",
+    "name": "Aline Fotso",
+    "email": "aline.fotso10@mail.com",
+    "phone": "679100020",
+    "password": "Secure@2024",
+    "role": "provider",
+    "profession": "hairdresser",
+    "photo": "https://randomuser.me/api/portraits/women/110.jpg",
+    "address": {
+      "quartier": "Autre",
+      "city": "Douala",
+      "country": "Cameroun"
+    },
+    "location": { "coordinates": [9.7250, 4.0750] },
+    "isEmailVerified": true,
+    "isValidated": true
+  }
 ]
